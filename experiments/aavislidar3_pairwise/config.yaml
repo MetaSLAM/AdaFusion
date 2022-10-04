@@ -1,0 +1,53 @@
+# net architecture
+architecture: aavislidarnet3
+fusion_method: cat  # or "linear", "mlp"
+
+# log and checkpoint
+data_path: ./data
+ckpt_name: aavislidarnet3-pairwise.pth
+
+# training parameters
+use_gpu: True
+epochs: 2500
+train_batch_size: 16
+test_batch_size: 7
+show_freq: 20    # unit: batch
+eval_freq: 2000  # unit: batch
+workers: 8       # num threads to load data
+
+# datasets
+dataset:
+    name: nclt  # {'robotcar', 'nclt', 'subT'}
+    base_path: ./data/NCLT-dataset # ./data/robotcar-dataset
+    train_pickle: train_pairs_10.pickle
+    test_pickle: test_items_10.pickle
+
+    image_size: [300, 400]    # (H,W)
+    voxel_shape: [72, 72, 48] # (X,Y,Z)
+    augmentation: False
+
+# loss params
+loss:
+    a: 1.0   # neg>(m+a) pos<(m-a)
+    m: 25.0   # neg>(m+a) pos<(m-a)
+    Lp: 1    # Lp-distance
+
+# optimizer, Adam
+optimize:
+    base_lr: 0.001
+    betas: [0.9, 0.999]
+    weight_decay: 0.001
+    amsgrad: True
+
+# learning rate scheduler, ReduceLROnPlateau
+# For the meaning of parameters, see pytorch document
+lr_scheduler:
+    factor: 0.9
+    patience: 6
+    cooldown: 2
+
+# hard mining
+hardM:
+    enabled: False
+    hardM_freq: 40     # per batch
+    nBatch: 24          # nBatch to select one hard batch

@@ -1,0 +1,11 @@
+__pycache__
+event
+/data
+/.vscode
+
+log.txt
+*.pth.tar
+*.pth
+
+eval_log.txt
+*.png

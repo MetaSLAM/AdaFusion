@@ -6,7 +6,7 @@ This is the source code for paper
 
 AdaFusion is a multi-modality fusion network that learns the compact feature representation of both images and point clouds and then adjusts their contribution in different environmental situation. The weights serve as dynamic adjustment to the contribution of the two modalities in different environments.
 
-![image](doc/demo.png)
+![image](./doc/demo.png)
 
 ## Usage
 - For training:

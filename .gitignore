@@ -8,4 +8,3 @@ log.txt
 *.pth
 
 eval_log.txt
-*.png
